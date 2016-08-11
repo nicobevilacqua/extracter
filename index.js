@@ -14,7 +14,6 @@ const getProperty = ($$, property) => {
     selector = selector[0];
     isArray = true;
   }
-  const match = property.match || undefined;
 
   const tmp = selector.split('@');
   selector = tmp[0];
