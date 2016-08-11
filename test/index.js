@@ -96,6 +96,80 @@ describe('Response types', () => {
       expect(response).to.have.key('links');
       expect(response.links).to.be.instanceof(Array);
       expect(response).to.not.be.empty;
+  it('Get childrens', () =>
+    extracter(url, {
+      features: {
+        parent: 'table tbody tr',
+        properties: {
+          title: {
+            selector: 'td span',
+            match: 0,
+            attr: 'text',
+          },
+          value: {
+            selector: 'td span',
+            match: 1,
+            attr: 'text',
+          },
+        },
+      },
+    }).then(response => {
+      /* {
+        features: [
+          {title: 'message1', value: 'value1'},
+          {title: 'message2', value: 'value2'},
+          {title: 'message3', value: 'value3'},
+        ]
+      } */
+      console.log(response);
+      expect(response).to.be.an('object');
+      expect(response).to.have.key('features');
+      // eslint-disable-next-line no-unused-expressions
+      expect(response.features).to.be.instanceof(Array).and.not.be.empty;
+      response.features.forEach(feature => {
+        expect(feature).to.have.all.keys('title', 'value');
+        // eslint-disable-next-line no-unused-expressions
+        expect(feature.title).to.be.an('string').an.not.be.empty;
+        // eslint-disable-next-line no-unused-expressions
+        expect(feature.value).to.be.an('string').an.not.be.empty;
+      });
+    })
+  );
+  it('Get childrens inline attr', () =>
+    extracter(url, {
+      features: {
+        parent: 'table tbody tr',
+        properties: {
+          title: {
+            selector: 'td span@text',
+            match: 0,
+          },
+          value: {
+            selector: 'td span@text',
+            match: 1,
+          },
+        },
+      },
+    }).then(response => {
+      /* {
+        features: [
+          {title: 'message1', value: 'value1'},
+          {title: 'message2', value: 'value2'},
+          {title: 'message3', value: 'value3'},
+        ]
+      } */
+      console.log(response);
+      expect(response).to.be.an('object');
+      expect(response).to.have.key('features');
+      // eslint-disable-next-line no-unused-expressions
+      expect(response.features).to.be.instanceof(Array).and.not.be.empty;
+      response.features.forEach(feature => {
+        expect(feature).to.have.all.keys('title', 'value');
+        // eslint-disable-next-line no-unused-expressions
+        expect(feature.title).to.be.an('string').an.not.be.empty;
+        // eslint-disable-next-line no-unused-expressions
+        expect(feature.value).to.be.an('string').an.not.be.empty;
+      });
     })
   );
 });

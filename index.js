@@ -1,11 +1,14 @@
 const cheerio = require('cheerio');
 
 const getProperty = ($$, property) => {
-  let $ = $$;
+  const $ = $$;
   if (property.parent) {
-    $ = cheerio.load($(property.parent).html(), {
-      normalizeWhitespace: true,
-    });
+    const childProperties = property.properties;
+    delete childProperties.parent;
+    return $(property.parent).toArray().map(parent =>
+      // eslint-disable-next-line no-use-before-define
+      crawler($(parent).html(), childProperties)
+    );
   }
 
   let selector = property.selector || property;
