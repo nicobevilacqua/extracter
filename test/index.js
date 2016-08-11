@@ -1,4 +1,5 @@
 /* global describe, it, before */
+const mlog = require('mocha-logger');
 const chai = require('chai');
 
 chai.config.includeStack = true;
@@ -22,7 +23,7 @@ describe('Response types', () => {
   it('url as string', () =>
     extracter(url, 'a@href').then(response => {
       /* http://link-1 */
-      console.log(response);
+      mlog.log(JSON.stringify(response));
       expect(response).to.be.an('string');
     })
   );
@@ -33,10 +34,9 @@ describe('Response types', () => {
       'http://link-3',
       'http://link-4',
       'http://link-5' ] */
-      console.log(response);
-      expect(response)
-        .to.be.instanceof(Array)
-        .to.not.be.empty;
+      mlog.log(JSON.stringify(response));
+      // eslint-disable-next-line no-unused-expressions
+      expect(response).to.be.instanceof(Array).to.not.be.empty;
     })
   );
   it('urls as object', () =>
@@ -51,7 +51,7 @@ describe('Response types', () => {
         link: http://link-1
       }
       */
-      console.log(response);
+      mlog.log(JSON.stringify(response));
       expect(response)
         .to.be.an('object')
         .and.to.have.key('link');
@@ -74,7 +74,7 @@ describe('Response types', () => {
          'http://link-5' ]
        }
       */
-      console.log(response);
+      mlog.log(JSON.stringify(response));
       expect(response)
         .to.be.an('object')
         .and.to.have.key('links');
@@ -94,7 +94,7 @@ describe('Response types', () => {
          'http://link-5' ]
        }
       */
-      console.log(response);
+      mlog.log(JSON.stringify(response));
       // eslint-disable-next-line no-unused-expressions
       expect(response).to.be.an('object').and.to.not.be.empty;
       expect(response).and.to.have.property('links');
@@ -126,7 +126,7 @@ describe('Response types', () => {
           {title: 'message3', value: 'value3'},
         ]
       } */
-      console.log(response);
+      mlog.log(JSON.stringify(response));
       expect(response).to.be.an('object');
       expect(response).to.have.key('features');
       // eslint-disable-next-line no-unused-expressions
@@ -163,7 +163,7 @@ describe('Response types', () => {
           {title: 'message3', value: 'value3'},
         ]
       } */
-      console.log(response);
+      mlog.log(JSON.stringify(response));
       expect(response).to.be.an('object');
       expect(response).to.have.key('features');
       // eslint-disable-next-line no-unused-expressions
