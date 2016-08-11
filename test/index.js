@@ -34,8 +34,9 @@ describe('Response types', () => {
       'http://link-4',
       'http://link-5' ] */
       console.log(response);
-      expect(response).to.be.instanceof(Array);
-      expect(response).to.not.be.empty;
+      expect(response)
+        .to.be.instanceof(Array)
+        .to.not.be.empty;
     })
   );
   it('urls as object', () =>
@@ -51,8 +52,9 @@ describe('Response types', () => {
       }
       */
       console.log(response);
-      expect(response).to.be.an('object');
-      expect(response).to.have.key('link');
+      expect(response)
+        .to.be.an('object')
+        .and.to.have.key('link');
       expect(response.link).to.be.an('string');
     })
   );
@@ -73,8 +75,9 @@ describe('Response types', () => {
        }
       */
       console.log(response);
-      expect(response).to.be.an('object');
-      expect(response).to.have.key('links');
+      expect(response)
+        .to.be.an('object')
+        .and.to.have.key('links');
       expect(response.links).to.be.an('string');
     });
   });
@@ -92,10 +95,12 @@ describe('Response types', () => {
        }
       */
       console.log(response);
-      expect(response).to.be.an('object');
-      expect(response).to.have.key('links');
+      // eslint-disable-next-line no-unused-expressions
+      expect(response).to.be.an('object').and.to.not.be.empty;
+      expect(response).and.to.have.property('links');
       expect(response.links).to.be.instanceof(Array);
-      expect(response).to.not.be.empty;
+    })
+  );
   it('Get childrens', () =>
     extracter(url, {
       features: {
