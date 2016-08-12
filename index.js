@@ -88,7 +88,7 @@ Chrome/52.0.2743.82 Safari/537.36
 `;
 const timeout = 10000;
 const gzip = false;
-const extracter = (_connection, properties) =>
+const xtracter = (_connection, properties) =>
 new Promise((resolve, reject) => {
   let connection = _connection;
 
@@ -119,4 +119,4 @@ new Promise((resolve, reject) => {
 });
 
 
-module.exports = extracter;
+module.exports = xtracter;

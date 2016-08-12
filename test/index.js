@@ -6,9 +6,8 @@ chai.config.includeStack = true;
 chai.config.showDiff = true;
 
 const expect = chai.expect;
-const extracter = require('../index');
+const xtracter = require('../index');
 
-// NOCK AVENIDA HOME AND PRODUCT
 const fs = require('fs');
 const nock = require('nock');
 
@@ -21,14 +20,14 @@ describe('Response types', () => {
     nock(url).persist().get('/').reply(200, html);
   });
   it('url as string', () =>
-    extracter(url, 'a@href').then(response => {
+    xtracter(url, 'a@href').then(response => {
       /* http://link-1 */
       mlog.log(JSON.stringify(response));
       expect(response).to.be.an('string');
     })
   );
   it('urls array', () =>
-    extracter(url, ['a@href']).then(response => {
+    xtracter(url, ['a@href']).then(response => {
       /* [ 'http://link-1',
       'http://link-2',
       'http://link-3',
@@ -40,7 +39,7 @@ describe('Response types', () => {
     })
   );
   it('urls as object', () =>
-    extracter(url, {
+    xtracter(url, {
       link: {
         selector: 'a',
         attr: 'href',
@@ -59,7 +58,7 @@ describe('Response types', () => {
     })
   );
   it('asdasd', () => {
-    extracter(url, {
+    xtracter(url, {
       links: {
         selector: ['a'],
         attr: 'href',
@@ -82,7 +81,7 @@ describe('Response types', () => {
     });
   });
   it('urls as array in an object', () =>
-    extracter(url, {
+    xtracter(url, {
       links: ['a@href'],
     }).then(response => {
       /*
@@ -102,7 +101,7 @@ describe('Response types', () => {
     })
   );
   it('Get childrens', () =>
-    extracter(url, {
+    xtracter(url, {
       features: {
         parent: 'table tbody tr',
         properties: {
@@ -141,7 +140,7 @@ describe('Response types', () => {
     })
   );
   it('Get childrens inline attr', () =>
-    extracter(url, {
+    xtracter(url, {
       features: {
         parent: 'table tbody tr',
         properties: {

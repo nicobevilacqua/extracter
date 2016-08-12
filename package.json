@@ -1,13 +1,17 @@
 {
-  "name": "extracter",
+  "name": "xtracter",
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicobevilacqua/xtracter.git"
+  },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --reporter spec",
     "watch": "./node_modules/mocha/bin/mocha --reporter spec --watch"
   },
-  "author": "",
+  "author": "Nicolás Bevilacqua",
   "license": "ISC",
   "git": {
     "scripts": {
