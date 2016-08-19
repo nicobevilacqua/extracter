@@ -139,6 +139,20 @@ describe('Response types', () => {
       });
     })
   );
+  it('Pass html string as first param', () =>
+    xtracter(`
+      <ul>
+        <li>text1</li>
+        <li>text2</li>
+        <li>text3</li>
+      </ul>
+    `, ['li@text']).then(response => {
+      mlog.log(JSON.stringify(response));
+      expect(response).to.be.instanceof(Array);
+      // eslint-disable-next-line no-unused-expressions
+      expect(response).to.not.be.null;
+    })
+  );
   it('Get childrens inline attr', () =>
     xtracter(url, {
       features: {

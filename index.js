@@ -78,6 +78,13 @@ const crawler = (html, _properties) => {
   return result;
 };
 
+const url = require('url');
+
+const validUrl = inputUrl => {
+  const parsedUrl = url.parse(inputUrl);
+  return parsedUrl.hostname && parsedUrl.host;
+};
+
 const request = require('request');
 const oneLine = require('common-tags').oneLine;
 // DEFAULT PROPERTIES
@@ -94,6 +101,10 @@ new Promise((resolve, reject) => {
 
   // SI PASO LA URL COMO PRIMER PARAMETRO
   if (typeof _connection === 'string') {
+    // IS PARAM HTML TEXT?
+    if (!validUrl(_connection)) {
+      return resolve(_connection);
+    }
     connection = {
       url: _connection,
     };
@@ -113,10 +124,15 @@ new Promise((resolve, reject) => {
     if (!response.statusCode || response.statusCode !== 200) {
       return reject(`Page error ${response.statusCode}`);
     }
-    const result = crawler(body, properties);
-    return resolve(result);
+    // RETURN HTML
+    return resolve(body);
   });
-});
+}).then(html =>
+  new Promise(resolve => {
+    const result = crawler(html, properties);
+    return resolve(result);
+  })
+);
 
 
 module.exports = xtracter;
