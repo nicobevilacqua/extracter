@@ -53,6 +53,7 @@ const getProperty = ($$, property) => {
 const crawler = (html, _properties) => {
   const $ = cheerio.load(html, {
     normalizeWhitespace: true,
+    decodeEntities: false,
   });
 
   let properties = _properties;
