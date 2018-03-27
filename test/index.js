@@ -57,29 +57,6 @@ describe('Response types', () => {
       expect(response.link).to.be.an('string');
     })
   );
-  it('asdasd', () => {
-    xtracter(url, {
-      links: {
-        selector: ['a'],
-        attr: 'href',
-      },
-    }).then(response => {
-      /*
-      { links:
-       [ 'http://link-1',
-         'http://link-2',
-         'http://link-3',
-         'http://link-4',
-         'http://link-5' ]
-       }
-      */
-      mlog.log(JSON.stringify(response));
-      expect(response)
-        .to.be.an('object')
-        .and.to.have.key('links');
-      expect(response.links).to.be.an('string');
-    });
-  });
   it('urls as array in an object', () =>
     xtracter(url, {
       links: ['a@href'],

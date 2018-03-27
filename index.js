@@ -1,4 +1,5 @@
 const cheerio = require('cheerio');
+const iconv = require('iconv-lite');
 
 const getProperty = ($$, property) => {
   const $ = $$;
@@ -118,6 +119,7 @@ new Promise((resolve, reject) => {
   connection.headers = connection.headers || {};
   connection.headers['User-Agent'] = connection.headers['User-Agent'] || agent;
   connection.gzip = connection.gzip || gzip;
+
   return request(connection, (error, response, body) => {
     if (error) {
       return reject(error);
@@ -126,6 +128,10 @@ new Promise((resolve, reject) => {
       return reject(`Page error ${response.statusCode}`);
     }
     // RETURN HTML
+    if (typeof body !== 'string' && connection.charset) {
+      const parsedBody = iconv.decode(body, connection.charset);
+      return resolve(parsedBody);
+    }
     return resolve(body);
   });
 }).then(html =>
